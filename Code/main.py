@@ -19,7 +19,11 @@ def validate_split(after_split):
                 print("The values have encountered an error, make sure that both numbers are integers, not decimals or negatives.")
                 continue
             print(f"valid problem: {num1}, {operator}, {num2}")
+        else:
+            break
+
                     
 def main():
     print(f'\n{split_problems(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"])}')
 main()
+validate_split(split_problems(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"]))
