@@ -27,16 +27,42 @@ def validate_split(after_split):
         else:
             break
 
-def width(after_split):
+def width_of_arithmetric(after_split):
+    width = []
     for num in after_split:
-        num1, operator, num2 = pair
+        num1, operator, num2 = num
         if len(num1) > len(num2):
-            return num1
+            padding = len(num1) + 2
+            width.append(padding)
         else:
-            return num2
+            padding = len(num2) + 2
+            width.append(padding)
+    return width
 
+
+def format_arithmetic(after_split):
+    top_rows = []
+    bottom_rows = []
+    dash_rows = []
+
+    widths = width_of_arithmetric(after_split)
+    for i in range(len(after_split)):
+        num1, operator, num2 = after_split[i]
+        width = widths[i]
+        top_spaces = width - len(num1)
+        bottom_spaces = (width - 1) - len(num2)
+        top = (" " * top_spaces) + num1
+        bottom = operator + (" " * bottom_spaces) + num2
+        dash = "-" * width
+
+        top_rows.append(top)
+        bottom_rows.append(bottom)
+        dash_rows.append(dash)
+
+    arranged = "    ".join(top_rows) + "\n" + "    ".join(bottom_rows) + "\n" + "    ".join(dash_rows)
+    return arranged
 
 def main():
-    print(f'\n{split_problems(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"])}')
+    print(format_arithmetic([['32', '+', '698'], ['3801', '-', '2'], ['45', '+', '43'], ['123', '+', '49']]))
 main()
-#validate_split(split_problems(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"]))
+
